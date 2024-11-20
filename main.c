@@ -49,16 +49,16 @@ int visualizar_memoria(int mem_fisica[]) {
   return 0;
 }
 
-int obter_quadro_livre(int mapa_bits[]) {
+int obter_quadro_livre(int mapa_quadros_livres[]) {
   while (1) {
     int quadro = rand() % qtd_quadros;
-    if (!mapa_bits[quadro]) {
+    if (!mapa_quadros_livres[quadro]) {
       return quadro;
     }
   }
 }
 
-int criar_processo(int mem_fisica[], int mapa_bits[]) {
+int criar_processo(int mem_fisica[], int mapa_quadros_livres[]) {
   int id_processo;
   int tam_processo;
 
@@ -91,13 +91,13 @@ int criar_processo(int mem_fisica[], int mapa_bits[]) {
     return 0;
   }
 
-  processo_t* processo = criar_e_inserir_processo(id_processo, tam_processo, &lista_processos);
+  processo_t* processo = criar_e_inserir_processo(id_processo, tam_processo, qtd_paginas, &lista_processos);
 
   int i;
   for (i = 0; i < qtd_paginas; i++) {
-    int quadro = obter_quadro_livre(mapa_bits);
+    int quadro = obter_quadro_livre(mapa_quadros_livres);
     mem_fisica[quadro] = id_processo;
-    mapa_bits[quadro] = 1;
+    mapa_quadros_livres[quadro] = 1;
     qtd_quadros_livres -= 1;
     criar_pagina_processo(processo, i, quadro);
   }
@@ -135,12 +135,12 @@ int visualizar_tabela_paginas() {
 int main() {
   obter_configuracoes();
   int mem_fisica[qtd_quadros];
-  int mapa_bits[qtd_quadros];
+  int mapa_quadros_livres[qtd_quadros];
   qtd_quadros_livres = qtd_quadros;
   int i;
   for (i = 0; i < qtd_quadros; i++) {
     mem_fisica[i] = -1;
-    mapa_bits[i] = 0;
+    mapa_quadros_livres[i] = 0;
   }
 
   int opcao;
@@ -164,7 +164,7 @@ int main() {
     switch (opcao) {
       case 1: visualizar_memoria(mem_fisica);
               break;
-      case 2: criar_processo(mem_fisica, mapa_bits);
+      case 2: criar_processo(mem_fisica, mapa_quadros_livres);
               break;
       case 3: visualizar_tabela_paginas();
               break;

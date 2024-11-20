@@ -1,12 +1,15 @@
 #include <stdlib.h>
 #include "processo.h"
 
-#include <stdio.h>
-
-processo_t* criar_e_inserir_processo(int id, int tamanho, processo_t** lista_processos) {
-  processo_t* processo = (processo_t*) malloc(sizeof(processo_t));
+processo_t* criar_e_inserir_processo(int id, int tamanho, int qtd_paginas, processo_t** lista_processos) {
+  processo_t* processo = (processo_t*) malloc(sizeof(processo_t) + sizeof(int) * qtd_paginas);
   processo->id = id;
   processo->tamanho = tamanho;
+
+  int i;
+  for (i = 0; i < qtd_paginas; i++) {
+    processo->mem_logica[i] = id;
+  }
 
   if (*lista_processos == NULL) {
     *lista_processos = processo;

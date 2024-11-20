@@ -12,9 +12,10 @@ typedef struct Processo {
   int tamanho;
   pagina_t* paginas;
   struct Processo* prox;
+  int mem_logica[];
 } processo_t;
 
-processo_t* criar_e_inserir_processo(int id, int tamanho, processo_t** lista_processos);
+processo_t* criar_e_inserir_processo(int id, int tamanho, int qtd_paginas, processo_t** lista_processos);
 
 processo_t* obter_processo_por_id(int id, processo_t* lista_processos);
 
