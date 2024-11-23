@@ -34,7 +34,8 @@ int obter_configuracoes() {
   } while (1);
 
   qtd_quadros = tam_mem_fisica / tam_pagina_quadro;
-  printf("\n--- Memória física: %d - Página/Quadro: %d - Máx. processo: %d ---\n", tam_mem_fisica, tam_pagina_quadro, tam_max_processo);
+  qtd_quadros_livres = qtd_quadros;
+  printf("\n--- Memória física: %dB - Página/Quadro: %dB - Máx. processo: %dB ---\n", tam_mem_fisica, tam_pagina_quadro, tam_max_processo);
 
   return 0;
 }
@@ -136,7 +137,6 @@ int main() {
   obter_configuracoes();
   int mem_fisica[qtd_quadros];
   int mapa_quadros_livres[qtd_quadros];
-  qtd_quadros_livres = qtd_quadros;
   int i;
   for (i = 0; i < qtd_quadros; i++) {
     mem_fisica[i] = -1;
