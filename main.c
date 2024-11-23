@@ -97,7 +97,7 @@ int criar_processo(int mem_fisica[], int mapa_quadros_livres[]) {
   int i;
   for (i = 0; i < qtd_paginas; i++) {
     int quadro = obter_quadro_livre(mapa_quadros_livres);
-    mem_fisica[quadro] = id_processo;
+    mem_fisica[quadro] = processo->mem_logica[i];
     mapa_quadros_livres[quadro] = 1;
     qtd_quadros_livres -= 1;
     criar_pagina_processo(processo, i, quadro);
