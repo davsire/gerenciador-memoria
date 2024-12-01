@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <math.h>
 #include "processo.h"
 
@@ -134,6 +135,7 @@ int visualizar_tabela_paginas() {
 }
 
 int main() {
+  srand(time(0));
   obter_configuracoes();
   int mem_fisica[qtd_quadros];
   int mapa_quadros_livres[qtd_quadros];
