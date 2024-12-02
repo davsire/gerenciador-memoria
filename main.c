@@ -36,7 +36,7 @@ int obter_configuracoes() {
 
   qtd_quadros = tam_mem_fisica / tam_pagina_quadro;
   qtd_quadros_livres = qtd_quadros;
-  printf("\n--- Memória física: %dB - Página/Quadro: %dB - Máx. processo: %dB ---\n", tam_mem_fisica, tam_pagina_quadro, tam_max_processo);
+  printf("\n--- Memória física: %dB | Página/Quadro: %dB | Máx. processo: %dB ---\n", tam_mem_fisica, tam_pagina_quadro, tam_max_processo);
 
   return 0;
 }
